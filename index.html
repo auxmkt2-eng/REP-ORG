@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Centro de herramientas operativas.">
+  <title>Centro de Herramientas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --slate:#676f7a; --blue:#556995; --blue-soft:#b3c4d8; --ice:#b3c9e3; --white:#ebf2fb; --bg:#060b12; --panel:#0b1520; --card:#101e2e; --line:#23374d; --muted:#8ca2b8; }
+    :root[data-theme="light"] { --bg:#f4f7fb; --panel:#fff; --card:#fff; --line:#d4deea; --muted:#566779; --white:#16222f; }
+    * { box-sizing:border-box; }
+    body { margin:0; min-height:100vh; padding:40px 20px 60px; font-family:"IBM Plex Sans",sans-serif; color:var(--white); background:radial-gradient(circle at 7% 0%,rgba(85,105,149,.35),transparent 38%),radial-gradient(circle at 100% 10%,rgba(179,201,227,.2),transparent 42%),var(--bg); }
+    .shell { position:relative; overflow:hidden; max-width:980px; min-height:630px; margin:auto; padding:28px; border:1px solid var(--line); border-radius:32px; background:linear-gradient(180deg,#0d1b29 0,var(--panel) 230px); box-shadow:0 40px 90px -30px rgba(0,0,0,.72),0 0 100px -65px var(--blue); }
+    :root[data-theme="light"] .shell { background:linear-gradient(180deg,#eaf0f9 0,var(--panel) 230px); box-shadow:0 30px 70px -35px rgba(85,105,149,.28); }
+    .shell::before { content:""; position:absolute; inset:0 0 auto; height:4px; background:linear-gradient(90deg,var(--slate),var(--blue),var(--blue-soft),var(--ice),var(--white)); background-size:200% 100%; animation:shift 10s ease-in-out infinite; }
+    @keyframes shift { 50% { background-position:100% 0; } }
+    .wave { position:absolute; top:-15px; left:0; width:100%; height:120px; opacity:.58; pointer-events:none; }
+    header { position:relative; display:flex; align-items:center; justify-content:space-between; gap:18px; padding:16px 6px 28px; border-bottom:1px solid rgba(179,196,216,.15); }
+    .brand { display:flex; align-items:center; gap:12px; font-family:"Space Grotesk",sans-serif; font-size:23px; font-weight:700; letter-spacing:-.03em; }
+    .brand-mark { display:grid; place-items:center; width:38px; height:38px; border:1px solid var(--blue-soft); border-radius:12px; color:var(--ice); background:rgba(85,105,149,.18); box-shadow:0 0 24px -8px var(--blue); }
+    .brand-mark svg { width:21px; height:21px; }
+    .theme-toggle { display:flex; padding:4px; border:1px solid var(--line); border-radius:999px; background:rgba(12,23,37,.88); }
+    :root[data-theme="light"] .theme-toggle { background:#fff; }
+    .theme-toggle button { display:flex; align-items:center; gap:6px; padding:7px 12px; border:0; border-radius:999px; background:transparent; color:var(--muted); font:500 11px "IBM Plex Mono",monospace; cursor:pointer; }
+    .theme-toggle button.active { background:linear-gradient(120deg,var(--blue),#7189bd); color:#fff; box-shadow:0 6px 16px -6px var(--blue); }
+    .subbar { position:relative; display:flex; align-items:center; gap:10px; width:max-content; max-width:100%; margin:30px 6px 28px; padding:11px 15px; border:1px solid var(--line); border-radius:999px; background:rgba(12,23,37,.75); color:var(--muted); font:12px "IBM Plex Mono",monospace; }
+    :root[data-theme="light"] .subbar { background:#fff; }
+    .status { width:7px; height:7px; border-radius:50%; background:var(--blue-soft); box-shadow:0 0 10px var(--blue-soft); }
+    .intro { position:relative; padding:0 10px 30px; }
+    .eyebrow { margin:0 0 11px; color:var(--blue-soft); font:11px "IBM Plex Mono",monospace; letter-spacing:.25em; text-transform:uppercase; }
+    .eyebrow::before { content:""; display:inline-block; width:22px; height:1px; margin:0 10px 3px 0; background:currentColor; }
+    h1 { max-width:560px; margin:0 0 11px; font:700 clamp(30px,4vw,40px)/1.12 "Space Grotesk",sans-serif; letter-spacing:-.04em; background:linear-gradient(90deg,var(--white),var(--ice),var(--blue-soft),var(--blue)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .intro > p:last-child { max-width:540px; margin:0; color:var(--muted); font-size:15px; line-height:1.6; }
+    .grid { position:relative; display:grid; grid-template-columns:repeat(3,1fr); gap:18px; padding:0 6px; }
+    .card { --accent:var(--blue); display:block; min-height:214px; padding:24px; overflow:hidden; border:1px solid var(--line); border-radius:18px; background:color-mix(in srgb,var(--card) 92%,transparent); color:inherit; text-decoration:none; transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease; }
+    .card:nth-child(2) { --accent:var(--blue-soft); } .card:nth-child(3) { --accent:var(--ice); }
+    .card::before { content:""; display:block; width:20%; height:3px; margin:-24px -24px 22px; background:var(--accent); transition:width .28s ease; }
+    .card:hover,.card:focus-visible { transform:translateY(-6px); border-color:var(--accent); box-shadow:0 18px 40px -18px #000,0 0 32px -15px var(--accent); outline:none; }
+    .card:hover::before,.card:focus-visible::before { width:calc(100% + 48px); }
+    .card-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; }
+    .icon,.arrow { display:grid; place-items:center; width:40px; height:40px; border-radius:12px; color:var(--accent); border:1px solid color-mix(in srgb,var(--accent) 45%,var(--line)); background:color-mix(in srgb,var(--accent) 15%,transparent); }
+    .arrow { width:30px; height:30px; border-radius:50%; color:var(--muted); background:transparent; transition:.2s ease; }
+    .card:hover .arrow { color:#0a1420; background:var(--accent); transform:rotate(45deg); }
+    .icon svg,.arrow svg { width:19px; height:19px; fill:none; stroke:currentColor; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; }
+    .arrow svg { width:14px; height:14px; }
+    .card h2 { min-height:50px; margin:0 0 16px; font:600 20px/1.25 "Space Grotesk",sans-serif; letter-spacing:-.02em; }
+    .tag { display:inline-block; padding:6px 10px; border:1px solid color-mix(in srgb,var(--accent) 40%,var(--line)); border-radius:999px; color:var(--accent); background:color-mix(in srgb,var(--accent) 13%,transparent); font:11px "IBM Plex Mono",monospace; }
+    footer { position:relative; display:flex; align-items:center; justify-content:space-between; gap:14px; margin-top:34px; padding:22px 12px 3px; border-top:1px solid rgba(179,196,216,.15); color:var(--muted); font:11px "IBM Plex Mono",monospace; }
+    .dots { display:flex; gap:4px; } .dots i { width:16px; height:8px; border-radius:2px; background:var(--blue); } .dots i:nth-child(2){background:var(--blue-soft)} .dots i:nth-child(3){background:var(--ice)}
+    @media (max-width:720px) { body { padding:18px 12px 32px; } .shell { padding:20px; border-radius:24px; } .grid { grid-template-columns:1fr; } .card { min-height:0; } }
+    @media (max-width:430px) { header { align-items:flex-start; flex-direction:column; } .subbar { margin-top:22px; } h1 { font-size:30px; } }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <svg class="wave" viewBox="0 0 980 130" preserveAspectRatio="none" aria-hidden="true"><path d="M0 32C120 95 240 0 360 55s240-35 360 12 180 0 260 14" fill="none" stroke="#556995" stroke-width="1.6"/><path d="M0 84C120 20 240 125 360 65s240 35 360-12 180 0 260-14" fill="none" stroke="#b3c9e3" stroke-width="1.6" opacity=".75"/></svg>
+    <header>
+      <div class="brand"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h11" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>Centro de Herramientas</div>
+      <div class="theme-toggle" role="group" aria-label="Selector de tema"><button type="button" data-theme="dark" class="active">◐ Oscuro</button><button type="button" data-theme="light">☼ Claro</button></div>
+    </header>
+    <div class="subbar"><span class="status"></span><span>Acceso directo</span><span> / </span><span>Herramientas operativas</span></div>
+    <section class="intro">
+      <p class="eyebrow">Panel de acceso</p>
+      <h1>Elige una herramienta y continúa.</h1>
+      <p>Accede rápidamente a cada plataforma desde un solo lugar.</p>
+    </section>
+    <section class="grid" aria-label="Herramientas disponibles">
+      <a class="card" href="https://auxmkt2-eng.github.io/Llenado-SAI/" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="icon"><svg viewBox="0 0 24 24"><path d="M7 3h8l3 3v15H7zM15 3v4h4M10 12h5M10 16h5"/></svg></span><span class="arrow"><svg viewBox="0 0 24 24"><path d="M6 18 18 6M10 6h8v8"/></svg></span></div><h2>Llenado SAI</h2><span class="tag">Captura de información</span></a>
+      <a class="card" href="https://soportesanare-create.github.io/calendario-innvida/" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="icon"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 10h16M8 14h.01M12 14h.01M16 14h.01"/></svg></span><span class="arrow"><svg viewBox="0 0 24 24"><path d="M6 18 18 6M10 6h8v8"/></svg></span></div><h2>Calendario Innvida</h2><span class="tag">Agenda y programación</span></a>
+      <a class="card" href="https://cotizador-30.web.app/" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="icon"><svg viewBox="0 0 24 24"><path d="M12 4v16M16 8c0-1.6-1.7-2.7-4-2.7S8 6.4 8 8c0 3.2 8 2.1 8 5.9 0 1.6-1.7 2.8-4 2.8S8 15.5 8 14"/></svg></span><span class="arrow"><svg viewBox="0 0 24 24"><path d="M6 18 18 6M10 6h8v8"/></svg></span></div><h2>Cotizador</h2><span class="tag">Cotización de servicios</span></a>
+    </section>
+    <footer><span>Centro de Herramientas · 2026</span><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span></footer>
+  </main>
+  <script>
+    const root = document.documentElement, buttons = document.querySelectorAll('[data-theme]');
+    function setTheme(theme) { root.dataset.theme = theme === 'light' ? 'light' : ''; buttons.forEach(button => button.classList.toggle('active', button.dataset.theme === theme)); localStorage.setItem('tools-theme', theme); }
+    setTheme(localStorage.getItem('tools-theme') || 'dark');
+    buttons.forEach(button => button.addEventListener('click', () => setTheme(button.dataset.theme)));
+  </script>
+</body>
+</html>
