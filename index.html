@@ -9,12 +9,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
-    :root { --slate:#b99089; --blue:#074976; --blue-soft:#e2c4bc; --ice:#f3dfda; --white:#fff8f5; --bg:#061d32; --panel:#092a45; --card:#0d3859; --line:#315e7d; --muted:#b8c5cc; }
-    :root[data-theme="light"] { --bg:#fcf7f5; --panel:#fff; --card:#fff; --line:#ead8d2; --muted:#657584; --white:#163b57; }
+    :root { --slate:#b8a9aa; --blue:#cdb8b2; --blue-soft:#dfcac2; --ice:#e3e3da; --white:#fffdf9; --bg:#282629; --panel:#3b3537; --card:#4b4243; --line:#807174; --muted:#d4c9c4; }
+    :root[data-theme="light"] { --bg:#f8f5f1; --panel:#fffdf9; --card:#fffdf9; --line:#e1d4ce; --muted:#766d6d; --white:#413a3a; }
     * { box-sizing:border-box; }
-    body { margin:0; min-height:100vh; padding:40px 20px 60px; font-family:"IBM Plex Sans",sans-serif; color:var(--white); background:radial-gradient(circle at 7% 0%,rgba(7,73,118,.55),transparent 38%),radial-gradient(circle at 100% 10%,rgba(226,196,188,.26),transparent 42%),var(--bg); }
-    .shell { position:relative; overflow:hidden; max-width:980px; min-height:630px; margin:auto; padding:28px; border:1px solid var(--line); border-radius:32px; background:linear-gradient(180deg,#0a3657 0,var(--panel) 230px); box-shadow:0 40px 90px -30px rgba(0,0,0,.72),0 0 100px -65px var(--blue-soft); }
-    :root[data-theme="light"] .shell { background:linear-gradient(180deg,#f6e7e3 0,var(--panel) 230px); box-shadow:0 30px 70px -35px rgba(7,73,118,.25); }
+    body { margin:0; min-height:100vh; padding:40px 20px 60px; font-family:"IBM Plex Sans",sans-serif; color:var(--white); background:radial-gradient(circle at 7% 0%,rgba(205,184,178,.34),transparent 38%),radial-gradient(circle at 100% 10%,rgba(227,227,218,.24),transparent 42%),var(--bg); }
+    .shell { position:relative; overflow:hidden; max-width:980px; min-height:630px; margin:auto; padding:28px; border:1px solid var(--line); border-radius:32px; background:linear-gradient(180deg,#51484a 0,var(--panel) 230px); box-shadow:0 40px 90px -30px rgba(0,0,0,.72),0 0 100px -65px var(--blue-soft); }
+    :root[data-theme="light"] .shell { background:linear-gradient(180deg,#eee1dc 0,var(--panel) 230px); box-shadow:0 30px 70px -35px rgba(184,169,170,.35); }
     .shell::before { content:""; position:absolute; inset:0 0 auto; height:4px; background:linear-gradient(90deg,var(--slate),var(--blue),var(--blue-soft),var(--ice),var(--white)); background-size:200% 100%; animation:shift 10s ease-in-out infinite; }
     @keyframes shift { 50% { background-position:100% 0; } }
     .wave { position:absolute; top:-15px; left:0; width:100%; height:120px; opacity:.58; pointer-events:none; }
@@ -25,7 +25,7 @@
     .theme-toggle { display:flex; padding:4px; border:1px solid var(--line); border-radius:999px; background:rgba(12,23,37,.88); }
     :root[data-theme="light"] .theme-toggle { background:#fff; }
     .theme-toggle button { display:flex; align-items:center; gap:6px; padding:7px 12px; border:0; border-radius:999px; background:transparent; color:var(--muted); font:500 11px "IBM Plex Mono",monospace; cursor:pointer; }
-    .theme-toggle button.active { background:linear-gradient(120deg,var(--blue),#17638f); color:#fff; box-shadow:0 6px 16px -6px var(--blue); }
+    .theme-toggle button.active { background:linear-gradient(120deg,#b8a9aa,var(--blue)); color:#fff; box-shadow:0 6px 16px -6px var(--blue); }
     .subbar { position:relative; display:flex; align-items:center; gap:10px; width:max-content; max-width:100%; margin:30px 6px 28px; padding:11px 15px; border:1px solid var(--line); border-radius:999px; background:rgba(12,23,37,.75); color:var(--muted); font:12px "IBM Plex Mono",monospace; }
     :root[data-theme="light"] .subbar { background:#fff; }
     .status { width:7px; height:7px; border-radius:50%; background:var(--blue-soft); box-shadow:0 0 10px var(--blue-soft); }
@@ -36,7 +36,7 @@
     .intro > p:last-child { max-width:540px; margin:0; color:var(--muted); font-size:15px; line-height:1.6; }
     .grid { position:relative; display:grid; grid-template-columns:repeat(2,1fr); gap:18px; padding:0 6px; }
     .card { --accent:var(--blue); display:block; min-height:214px; padding:24px; overflow:hidden; border:1px solid var(--line); border-radius:18px; background:color-mix(in srgb,var(--card) 92%,transparent); color:inherit; text-decoration:none; transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease; }
-    .card:nth-child(2) { --accent:var(--blue-soft); } .card:nth-child(3) { --accent:var(--ice); } .card:nth-child(4) { --accent:#e9aea3; }
+    .card:nth-child(2) { --accent:var(--blue-soft); } .card:nth-child(3) { --accent:var(--ice); } .card:nth-child(4) { --accent:var(--slate); }
     .card::before { content:""; display:block; width:20%; height:3px; margin:-24px -24px 22px; background:var(--accent); transition:width .28s ease; }
     .card:hover,.card:focus-visible { transform:translateY(-6px); border-color:var(--accent); box-shadow:0 18px 40px -18px #000,0 0 32px -15px var(--accent); outline:none; }
     .card:hover::before,.card:focus-visible::before { width:calc(100% + 48px); }
@@ -56,7 +56,7 @@
 </head>
 <body>
   <main class="shell">
-    <svg class="wave" viewBox="0 0 980 130" preserveAspectRatio="none" aria-hidden="true"><path d="M0 32C120 95 240 0 360 55s240-35 360 12 180 0 260 14" fill="none" stroke="#e2c4bc" stroke-width="1.6"/><path d="M0 84C120 20 240 125 360 65s240 35 360-12 180 0 260-14" fill="none" stroke="#f3dfda" stroke-width="1.6" opacity=".75"/></svg>
+    <svg class="wave" viewBox="0 0 980 130" preserveAspectRatio="none" aria-hidden="true"><path d="M0 32C120 95 240 0 360 55s240-35 360 12 180 0 260 14" fill="none" stroke="#dfcac2" stroke-width="1.6"/><path d="M0 84C120 20 240 125 360 65s240 35 360-12 180 0 260-14" fill="none" stroke="#e3e3da" stroke-width="1.6" opacity=".75"/></svg>
     <header>
       <div class="brand"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h11" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>Centro de Herramientas</div>
       <div class="theme-toggle" role="group" aria-label="Selector de tema"><button type="button" data-theme="dark" class="active">◐ Oscuro</button><button type="button" data-theme="light">☼ Claro</button></div>
